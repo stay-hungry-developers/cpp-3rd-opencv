@@ -1,0 +1,31 @@
+name: build
+
+on:
+  push: {branches: main}
+  pull_request: {branches: main}
+
+jobs:
+  build:
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os: [macos-latest, ubuntu-latest]
+    env:
+      IMAGE_NAME: sample-app
+    name: Build and Run
+    steps:
+      - uses: actions/checkout@v2
+      - name: check environment
+        run: echo ${{ env.IMAGE_NAME }}
+      - name: check build tools and folder structure
+        run: |
+          ls
+          pwd
+          cmake --version
+          make --version
+          which g++
+          which clang++
+      - name: build using clang++
+        run: |
+          ./buildme.sh
+
