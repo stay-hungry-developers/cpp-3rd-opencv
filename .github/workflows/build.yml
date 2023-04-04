@@ -9,7 +9,7 @@ jobs:
     runs-on: ${{ matrix.os }}
     strategy:
       matrix:
-        os: [macos-latest, ubuntu-latest]
+        os: [ubuntu-latest]
     env:
       IMAGE_NAME: sample-app
     name: Build and Run
@@ -27,5 +27,9 @@ jobs:
           which clang++
       - name: build using clang++
         run: |
-          ./buildme.sh
+          ./build_opencv.sh
+      - name: run main
+        run: |
+          make
+          ./hello.out
 
