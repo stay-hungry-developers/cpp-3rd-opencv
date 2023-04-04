@@ -28,9 +28,13 @@ jobs:
       - name: build using clang++
         run: |
           ./build_opencv.sh
-      - name: find open path
+      - name: check environment
         run: |
+          find /usr -name "opencv4.pc"
           find /usr -name "opencv.pc"
+          ls /usr/local/lib/pkgconfig
+          ls /etc/ld.so.config.d/
+          echo $PKG_CONFIG_PATH
       - name: run main
         run: |
           make
