@@ -1,6 +1,6 @@
 #!/bin/bash
 
-OPENCV_VERSION=4.1.0
+OPENCV_VERSION=4.5.5
 
 apt-get update 
 apt-get install -y build-essential 
