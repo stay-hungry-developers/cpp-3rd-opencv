@@ -1,99 +1,55 @@
 #!/bin/bash
 
-# sudo apt-get -y update
-# sudo apt-get install -y zlib1g-dev libjpeg-dev libwebp-dev libpng-dev libtiff5-dev libjasper-dev libopenexr-dev libgdal-dev libopencv-dev 
+OPENCV_VERSION=4.1.0
 
-# Set OpenCV version and download URL
-OPENCV_VERSION="2.4.13.6"
-OPENCV_URL="https://github.com/opencv/opencv/archive/${OPENCV_VERSION}.zip"
+apt-get update 
+apt-get install -y build-essential 
+# apt-get install -y cmake 
+# apt-get install -y wget 
+# apt-get install -y git 
+# apt-get install -y unzip 
+apt-get install -y yasm 
+apt-get install -y pkg-config 
+apt-get install -y libjpeg-dev 
+apt-get install -y libtiff-dev 
+apt-get install -y libpng-dev 
+apt-get install -y libavcodec-dev 
+apt-get install -y libavformat-dev 
+apt-get install -y libswscale-dev 
+apt-get install -y libv4l-dev 
+apt-get install -y libatlas-base-dev 
+apt-get install -y gfortran 
+apt-get install -y libtbb2 
+apt-get install -y libtbb-dev 
+apt-get install -y libpq-dev 
+apt-get install -y libgtk2.0-dev 
 
-# Set installation directory
-INSTALL_DIR="/usr/local"
+cd /
+wget https://github.com/opencv/opencv/archive/${OPENCV_VERSION}.zip
+unzip ${OPENCV_VERSION}.zip
+wget https://github.com/opencv/opencv_contrib/archive/${OPENCV_VERSION}.zip -O ${OPENCV_VERSION}-contrib.zip 
+unzip ${OPENCV_VERSION}-contrib.zip
+mkdir /opencv-${OPENCV_VERSION}/cmake_binary
+cd /opencv-${OPENCV_VERSION}/cmake_binary \
+&& cmake -DBUILD_TIFF=ON \
+  -DBUILD_opencv_java=OFF \
+  -DWITH_CUDA=OFF \
+  -DENABLE_AVX=ON \
+  -DWITH_OPENGL=ON \
+  -DWITH_OPENCL=ON \
+  -DWITH_IPP=ON \
+  -DWITH_TBB=ON \
+  -DWITH_EIGEN=ON \
+  -DWITH_V4L=ON \
+  -DBUILD_TESTS=OFF \
+  -DBUILD_PERF_TESTS=OFF \
+  -DCMAKE_BUILD_TYPE=RELEASE \
+  -DCMAKE_INSTALL_PREFIX=$(python3 -c "import sys; print(sys.prefix)") \
+  -DOPENCV_EXTRA_MODULES_PATH=/opencv_contrib-${OPENCV_VERSION}/modules \
+  -DOPENCV_GENERATE_PKGCONFIG=YES \
+  .. 
 
-# # Install dependencies
-# echo "Installing dependencies..."
-# apt-get update
-# apt-get install -y build-essential cmake libgtk2.0-dev pkg-config python-dev python-numpy libavcodec-dev libavformat-dev libswscale-dev
-
-# # Download and extract OpenCV
-echo "Downloading OpenCV..."
-curl -L "${OPENCV_URL}" -o opencv.zip
-unzip opencv.zip
-rm opencv.zip
-
-# # Configure and build OpenCV
-cd opencv-${OPENCV_VERSION}
-mkdir build && cd build
-echo "Configuring OpenCV..."
-# cmake \
-#   -DCMAKE_BUILD_TYPE=Release \
-#   -DCMAKE_INSTALL_PREFIX=${INSTALL_DIR} \
-#   -DBUILD_SHARED_LIBS=OFF \
-#   -DBUILD_TESTS=OFF \
-#   -DBUILD_PERF_TESTS=OFF \
-#   -DBUILD_EXAMPLES=OFF \
-#   -DWITH_IPP=OFF \
-#   -DWITH_TBB=OFF \
-#   -DWITH_OPENMP=OFF \
-#   -DWITH_CUDA=OFF \
-#   -DWITH_OPENCL=OFF \
-#   -DWITH_FFMPEG=OFF \
-#   -DWITH_GTK=ON \
-#   -DWITH_GTK_2_X=ON \
-#   -DWITH_VTK=OFF \
-#   -DWITH_QT=OFF \
-#   -DWITH_JPEG=ON \
-#   -DWITH_PNG=ON \
-#   -DWITH_TIFF=ON \
-#   -DWITH_WEBP=ON \
-#   -DWITH_ZLIB=ON \
-#   -DWITH_OPENEXR=ON \
-#   -DWITH_LAPACK=OFF \
-#   -DWITH_EIGEN=OFF \
-#   -DWITH_MKL=OFF \
-#   -DWITH_ITT=OFF \
-#   -DWITH_PROTOBUF=OFF \
-#   -DWITH_GDAL=OFF \
-#   -DWITH_GDCM=OFF \
-#   -DWITH_QT=OFF \
-#   -DWITH_CUFFT=OFF \
-#   -DWITH_CUBLAS=OFF \
-#   -DWITH_NVCUVID=OFF \
-#   -DWITH_CUDA_SPARSE=OFF \
-#   -DWITH_CUDNN=OFF \
-#   -DWITH_CUBLASXT=OFF \
-#   -DWITH_NVML=OFF \
-#   -DWITH_QUIRC=OFF \
-#   -DWITH_OPENCL_SVM=OFF \
-#   -DWITH_OPENCLAMDFFT=OFF \
-#   -DWITH_OPENCLAMDBLAS=OFF \
-#   -DWITH_VA=OFF \
-#   -DWITH_VA_INTEL=OFF \
-#   -DWITH_VA_FFMPEG=OFF \
-#   -DWITH_GSTREAMER=OFF \
-#   -DWITH_GSTREAMER_0_10=OFF \
-#   -DWITH_AVFOUNDATION=OFF \
-#   -DWITH_CAROTENE=OFF \
-#   -DWITH_IMAGEIO=OFF \
-#   -DWITH_GPHOTO2=OFF \
-#   -DWITH_DC1394=OFF \
-#   -DWITH_NVCUDA=OFF \
-#   -DWITH_NVTX=OFF \
-#   -DWITH_XINE=OFF \
-#   -DWITH_LAPACK=OFF \
-#   -DWITH_OPENBLAS=OFF \
-#   -DWITH_ACCELERATE=OFF \
-#   ..
-
-# echo "Building OpenCV..."
-# make -j4
-
-# # Install OpenCV
-# echo "Installing OpenCV..."
-# sudo make install
-
-### Compile and install
-cmake -G "Unix Makefiles" -DCMAKE_CXX_COMPILER=/usr/bin/g++ CMAKE_C_COMPILER=/usr/bin/gcc -DCMAKE_BUILD_TYPE=RELEASE -DCMAKE_INSTALL_PREFIX=/usr/local -DWITH_TBB=ON -DBUILD_NEW_PYTHON_SUPPORT=ON -DWITH_V4L=ON -DINSTALL_C_EXAMPLES=ON -DINSTALL_PYTHON_EXAMPLES=ON -DBUILD_EXAMPLES=ON -DWITH_QT=ON -DWITH_OPENGL=ON -DBUILD_FAT_JAVA_LIB=ON -DINSTALL_TO_MANGLED_PATHS=ON -DINSTALL_CREATE_DISTRIB=ON -DINSTALL_TESTS=ON -DENABLE_FAST_MATH=ON -DWITH_IMAGEIO=ON -DBUILD_SHARED_LIBS=OFF -DWITH_GSTREAMER=ON ..
-make -j4 # Uses all machine cores
-make install
-
+make -j$(nproc) install
+cp /opencv-4.1.0/cmake_binary/unix-install/opencv4.pc /usr/lib/pkgconfig/
+rm /${OPENCV_VERSION}.zip
+rm /${OPENCV_VERSION}-contrib.zip
