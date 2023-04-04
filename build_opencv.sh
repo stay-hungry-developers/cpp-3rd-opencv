@@ -1,5 +1,8 @@
 #!/bin/bash
 
+sudo apt-get -y update
+sudo apt-get install -y zlib1g-dev libjpeg-dev libwebp-dev libpng-dev libtiff5-dev libjasper-dev libopenexr-dev libgdal-dev
+
 # Set OpenCV version and download URL
 OPENCV_VERSION="4.5.5"
 OPENCV_URL="https://github.com/opencv/opencv/archive/${OPENCV_VERSION}.zip"
@@ -8,8 +11,8 @@ OPENCV_URL="https://github.com/opencv/opencv/archive/${OPENCV_VERSION}.zip"
 INSTALL_DIR="/usr/local"
 
 # Install dependencies
-echo "Installing dependencies..."
-brew install cmake python
+# echo "Installing dependencies..."
+# brew install cmake python
 
 # Download and extract OpenCV
 echo "Downloading OpenCV..."
@@ -82,7 +85,7 @@ cmake \
   ..
 
 echo "Building OpenCV..."
-make -j8
+make -j4
 
 # Install OpenCV
 echo "Installing OpenCV..."
