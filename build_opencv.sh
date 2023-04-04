@@ -82,6 +82,7 @@ cmake \
   -DWITH_LAPACK=OFF \
   -DWITH_OPENBLAS=OFF \
   -DWITH_ACCELERATE=OFF \
+  -DOPENCV_GENERATE_PKGCONFIG=ON \
   ..
 
 echo "Building OpenCV..."
