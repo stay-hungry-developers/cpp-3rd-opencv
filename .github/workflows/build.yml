@@ -28,6 +28,9 @@ jobs:
       - name: build using clang++
         run: |
           ./build_opencv.sh
+      -name: find open path
+        run: |
+          find /usr -name "opencv.pc"
       - name: run main
         run: |
           make
