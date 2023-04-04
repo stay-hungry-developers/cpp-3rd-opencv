@@ -12,7 +12,9 @@ INSTALL_DIR="/usr/local"
 
 # Install dependencies
 # echo "Installing dependencies..."
-# brew install cmake python
+echo "Installing dependencies..."
+sudo apt-get update
+sudo apt-get install -y build-essential cmake libgtk2.0-dev pkg-config python-dev python-numpy libavcodec-dev libavformat-dev libswscale-dev
 
 # Download and extract OpenCV
 echo "Downloading OpenCV..."
@@ -37,8 +39,8 @@ cmake \
   -DWITH_CUDA=OFF \
   -DWITH_OPENCL=OFF \
   -DWITH_FFMPEG=OFF \
-  -DWITH_GTK=OFF \
-  -DWITH_GTK_2_X=OFF \
+  -DWITH_GTK=ON \
+  -DWITH_GTK_2_X=ON \
   -DWITH_VTK=OFF \
   -DWITH_QT=OFF \
   -DWITH_JPEG=ON \
@@ -82,7 +84,6 @@ cmake \
   -DWITH_LAPACK=OFF \
   -DWITH_OPENBLAS=OFF \
   -DWITH_ACCELERATE=OFF \
-  -DOPENCV_GENERATE_PKGCONFIG=ON \
   ..
 
 echo "Building OpenCV..."
