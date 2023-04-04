@@ -1,7 +1,5 @@
 #!/bin/bash
 
-OPENCV_VERSION=4.5.5
-
 apt-get update 
 apt-get install -y build-essential 
 # apt-get install -y cmake 
@@ -24,14 +22,31 @@ apt-get install -y libtbb-dev
 apt-get install -y libpq-dev 
 apt-get install -y libgtk2.0-dev 
 
-cd /
-wget https://github.com/opencv/opencv/archive/${OPENCV_VERSION}.zip
-unzip ${OPENCV_VERSION}.zip
-# wget https://github.com/opencv/opencv_contrib/archive/${OPENCV_VERSION}.zip -O ${OPENCV_VERSION}-contrib.zip 
-# unzip ${OPENCV_VERSION}-contrib.zip
-mkdir /opencv-${OPENCV_VERSION}/cmake_binary
-cd /opencv-${OPENCV_VERSION}/cmake_binary \
-&& cmake -DBUILD_TIFF=ON \
+
+OPENCV_VERSION="4.5.5"
+OPENCV_URL="https://github.com/opencv/opencv/archive/${OPENCV_VERSION}.zip"
+
+# Set installation directory
+INSTALL_DIR="/usr/local"
+
+# Download and extract OpenCV
+echo "Downloading OpenCV..."
+curl -L "${OPENCV_URL}" -o opencv.zip
+unzip opencv.zip
+rm opencv.zip
+
+# Configure and build OpenCV
+cd opencv-${OPENCV_VERSION}
+mkdir build && cd build
+
+# cd /
+# wget https://github.com/opencv/opencv/archive/${OPENCV_VERSION}.zip
+# unzip ${OPENCV_VERSION}.zip
+# # wget https://github.com/opencv/opencv_contrib/archive/${OPENCV_VERSION}.zip -O ${OPENCV_VERSION}-contrib.zip 
+# # unzip ${OPENCV_VERSION}-contrib.zip
+# mkdir /opencv-${OPENCV_VERSION}/cmake_binary
+# cd /opencv-${OPENCV_VERSION}/cmake_binary \
+cmake -DBUILD_TIFF=ON \
   -DBUILD_opencv_java=OFF \
   -DWITH_CUDA=OFF \
   -DENABLE_AVX=ON \
@@ -50,6 +65,9 @@ cd /opencv-${OPENCV_VERSION}/cmake_binary \
   .. 
 
 make -j$(nproc) install
-cp /opencv-4.1.0/cmake_binary/unix-install/opencv4.pc /usr/lib/pkgconfig/
-rm /${OPENCV_VERSION}.zip
+
+cp /opencv-${OPENCV_VERSION}/build/unix-install/opencv4.pc /usr/lib/pkgconfig/
+
+
+# rm /${OPENCV_VERSION}.zip
 # rm /${OPENCV_VERSION}-contrib.zip
