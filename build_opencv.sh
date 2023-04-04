@@ -1,7 +1,7 @@
 #!/bin/bash
 
-sudo apt-get -y update
-sudo apt-get install -y zlib1g-dev libjpeg-dev libwebp-dev libpng-dev libtiff5-dev libjasper-dev libopenexr-dev libgdal-dev libopencv-dev 
+# sudo apt-get -y update
+# sudo apt-get install -y zlib1g-dev libjpeg-dev libwebp-dev libpng-dev libtiff5-dev libjasper-dev libopenexr-dev libgdal-dev libopencv-dev 
 
 # Set OpenCV version and download URL
 OPENCV_VERSION="4.5.5"
