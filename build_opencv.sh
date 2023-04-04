@@ -27,8 +27,8 @@ apt-get install -y libgtk2.0-dev
 cd /
 wget https://github.com/opencv/opencv/archive/${OPENCV_VERSION}.zip
 unzip ${OPENCV_VERSION}.zip
-wget https://github.com/opencv/opencv_contrib/archive/${OPENCV_VERSION}.zip -O ${OPENCV_VERSION}-contrib.zip 
-unzip ${OPENCV_VERSION}-contrib.zip
+# wget https://github.com/opencv/opencv_contrib/archive/${OPENCV_VERSION}.zip -O ${OPENCV_VERSION}-contrib.zip 
+# unzip ${OPENCV_VERSION}-contrib.zip
 mkdir /opencv-${OPENCV_VERSION}/cmake_binary
 cd /opencv-${OPENCV_VERSION}/cmake_binary \
 && cmake -DBUILD_TIFF=ON \
@@ -52,4 +52,4 @@ cd /opencv-${OPENCV_VERSION}/cmake_binary \
 make -j$(nproc) install
 cp /opencv-4.1.0/cmake_binary/unix-install/opencv4.pc /usr/lib/pkgconfig/
 rm /${OPENCV_VERSION}.zip
-rm /${OPENCV_VERSION}-contrib.zip
+# rm /${OPENCV_VERSION}-contrib.zip
