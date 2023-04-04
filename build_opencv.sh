@@ -4,7 +4,7 @@
 # sudo apt-get install -y zlib1g-dev libjpeg-dev libwebp-dev libpng-dev libtiff5-dev libjasper-dev libopenexr-dev libgdal-dev libopencv-dev 
 
 # Set OpenCV version and download URL
-OPENCV_VERSION="4.5.5"
+OPENCV_VERSION="2.4.13.6"
 OPENCV_URL="https://github.com/opencv/opencv/archive/${OPENCV_VERSION}.zip"
 
 # Set installation directory
