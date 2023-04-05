@@ -4,7 +4,7 @@ using namespace cv;
 int main(int argc, char** argv)
 {
   // Read the image
-  Mat image = imread("input.jpg");
+  Mat image = imread("./input.jpg");
 
   // Resize the image
   Mat resizedImage;
