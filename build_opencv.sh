@@ -9,7 +9,7 @@ INSTALL_DIR="/usr/local"
 
 # Install dependencies
 echo "Installing dependencies..."
-# brew install cmake python
+apt-get install -y libjpeg-dev libpng-dev
 
 # Download and extract OpenCV
 echo "Downloading OpenCV..."
@@ -39,8 +39,8 @@ cmake \
   -DWITH_GTK_2_X=OFF \
   -DWITH_VTK=OFF \
   -DWITH_QT=OFF \
-  -DWITH_JPEG=OFF \
-  -DWITH_PNG=OFF \
+  -DWITH_JPEG=ON \
+  -DWITH_PNG=ON \
   -DWITH_TIFF=OFF \
   -DWITH_OPENJPEG=OFF \
   -DWITH_JASPER=OFF \
