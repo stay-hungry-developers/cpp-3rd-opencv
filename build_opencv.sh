@@ -28,6 +28,7 @@ cmake \
   -DBUILD_TESTS=OFF \
   -DBUILD_PERF_TESTS=OFF \
   -DBUILD_EXAMPLES=OFF \
+  -DOPENCV_GENERATE_PKGCONFIG=YES \
   -DWITH_IPP=OFF \
   -DWITH_TBB=OFF \
   -DWITH_OPENMP=OFF \
@@ -86,7 +87,7 @@ make -j4
 
 # Install OpenCV
 echo "Installing OpenCV..."
-make install
+sudo make install
 
 
 
