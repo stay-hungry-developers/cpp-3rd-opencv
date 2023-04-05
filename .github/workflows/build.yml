@@ -38,6 +38,6 @@ jobs:
           echo $PKG_CONFIG_PATH
       - name: run main
         run: |
-          make
+          export PKG_CONFIG_PATH=/usr/local/lib/pkgconfig && make
           ./hello.out
 
