@@ -36,6 +36,9 @@ jobs:
           echo $PKG_CONFIG_PATH
           export PKG_CONFIG_PATH=/usr/local/lib/pkgconfig
           echo $PKG_CONFIG_PATH
+      - name: find library
+        run: |
+          find /usr /opt -iname libjpeg\*so\*
       - name: run main
         run: |
           export PKG_CONFIG_PATH=/usr/local/lib/pkgconfig && make
