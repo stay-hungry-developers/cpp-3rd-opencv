@@ -10,7 +10,7 @@ INSTALL_DIR="/usr/local"
 # Install dependencies
 echo "Installing dependencies..."
 apt-get update
-apt-get install -y libjpeg-dev libpng-dev libavcodec-dev libavformat-dev libswscale-dev libavresample-dev libtbb-dev openexr gfortran
+apt-get install -y libjpeg-dev libpng-dev libavcodec-dev libavformat-dev libswscale-dev libavresample-dev libtbb-dev openexr gfortran libatlas-base-dev 
 
 # Download and extract OpenCV
 echo "Downloading OpenCV..."
