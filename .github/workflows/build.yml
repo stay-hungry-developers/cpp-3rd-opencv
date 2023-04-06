@@ -39,6 +39,9 @@ jobs:
       - name: find library
         run: |
           find /usr /opt -iname libjpeg\*so\*
+      - name: find headers
+        run: |
+          find /usr /opt -name "opencv.hpp"
       - name: run main
         run: |
           export PKG_CONFIG_PATH=/usr/local/lib/pkgconfig && make
